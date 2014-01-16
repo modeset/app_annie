@@ -22,11 +22,11 @@ module AppAnnie
       @last_sales_date = attributes['last_sales_date']
     end
 
-    def sales(breakdown = nil)
+    def sales(options = {})
       response = AppAnnie.connection.get do |req|
         req.headers['Authorization'] = "Bearer #{AppAnnie.api_key}"
         req.headers['Accept'] = 'application/json'
-        req.url "/v1/accounts/#{@account.id}/apps/#{@id}/sales", break_down: breakdown
+        req.url "/v1/accounts/#{@account.id}/apps/#{@id}/sales", options
       end
 
       case response.status

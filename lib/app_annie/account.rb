@@ -21,11 +21,11 @@ module AppAnnie
       @last_sales_date = attributes['last_sales_date']
     end
 
-    def apps
+    def apps(options = {})
       response = AppAnnie.connection.get do |req|
         req.headers['Authorization'] = "Bearer #{AppAnnie.api_key}"
         req.headers['Accept'] = 'application/json'
-        req.url "/v1/accounts/#{id}/apps"
+        req.url "/v1/accounts/#{id}/apps", options
       end
 
       case response.status
@@ -38,11 +38,11 @@ module AppAnnie
       end
     end
 
-    def sales(breakdown = nil)
+    def sales(options = {})
       response = AppAnnie.connection.get do |req|
         req.headers['Authorization'] = "Bearer #{AppAnnie.api_key}"
         req.headers['Accept'] = 'application/json'
-        req.url "/v1/accounts/#{id}/sales", break_down: breakdown
+        req.url "/v1/accounts/#{id}/sales", options
       end
 
       case response.status

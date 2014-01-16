@@ -16,11 +16,11 @@ module AppAnnie
 
   end
 
-  def self.accounts
+  def self.accounts(options = {})
     response = connection.get do |req|
       req.headers['Authorization'] = "Bearer #{api_key}"
       req.headers['Accept'] = 'application/json'
-      req.url '/v1/accounts'
+      req.url '/v1/accounts', options
     end
 
     case response.status
