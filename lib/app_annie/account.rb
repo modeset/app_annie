@@ -29,7 +29,7 @@ module AppAnnie
       end
 
       case response.status
-      when 200 then return JSON.parse(response.body)['app_list'].map { |hash| App.new(hash) }
+      when 200 then return JSON.parse(response.body)['app_list'].map { |hash| App.new(self, hash) }
       when 401 then raise Unauthorized, "Invalid API key - set an env var for APPANNIE_API_KEY or set AppAnnie.api_key manually"
       when 429 then raise RateLimitExceeded
       when 500 then raise ServerError

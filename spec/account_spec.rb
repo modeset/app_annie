@@ -45,6 +45,7 @@ describe AppAnnie::Account do
 
       it 'sets properties appropriately from the response' do
         app = account.apps.first
+        expect(app.account).to be(account)
         expect(app.status).to be_true
         expect(app.name).to eq('Test App')
         expect(app.id).to eq('com.testco.TestApp')
