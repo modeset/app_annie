@@ -2,6 +2,7 @@ require 'faraday'
 require 'json'
 require 'app_annie/account'
 require 'app_annie/app'
+require 'app_annie/intelligence'
 require 'app_annie/version'
 
 module AppAnnie

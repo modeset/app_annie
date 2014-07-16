@@ -23,6 +23,17 @@ Or install it yourself as:
 
 First, set your AppAnnie API key. You can do this via the `APPANNIE_API_KEY` environment variable, or by setting `AppAnnie.api_key`
 
+### Intelligence API
+
+(after setting your api key)
+```ruby
+AppAnnie::Intelligence.top_app_charts(options)
+```
+
+* required options: `market`, `device`, and `categories`
+* default options: `vertical: 'apps'`, `countries: 'US'`
+* all other options get passed as query params. See Intelligence API docs
+
 ## Contributing
 
 1. Fork it
