@@ -1,8 +1,7 @@
 module AppAnnie
   class Intelligence
-
-    #see AppAnnie Intelligence docs for options
-    #all ops get passed as query params
+    # see AppAnnie Intelligence docs for options
+    # all ops get passed as query params
     def self.top_app_charts(opts)
       [:market, :device, :categories].each do |key|
         unless opts.keys.include?(key)
@@ -23,13 +22,13 @@ module AppAnnie
       end
       case response.status
       when 200 then return JSON.parse(response.body)['list']
-      when 401 then raise Unauthorized, "Invalid API key - set an env var for APPANNIE_API_KEY or set AppAnnie.api_key manually"
+      when 401 then raise Unauthorized, "Invalid API key - set an env var for APPANNIE_API_KEY\
+                                          or set AppAnnie.api_key manually"
       when 429 then raise RateLimitExceeded
       when 500 then raise ServerError
       when 503 then raise ServerUnavailable
       else raise BadResponse, "An error occurred. Response code: #{response.status}"
       end
     end
-
   end
 end
