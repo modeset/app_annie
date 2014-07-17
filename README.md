@@ -9,15 +9,11 @@ Simple Ruby wrapper for [App Annie's](http://www.appannie.com/) [analytics API](
 
 Add this line to your application's Gemfile:
 
-    gem 'app_annie'
+    gem 'app_annie', github: 'modeset/app_annie'
 
 And then execute:
 
     $ bundle
-
-Or install it yourself as:
-
-    $ gem install app_annie
 
 ## Usage
 
