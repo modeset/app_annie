@@ -1,0 +1,35 @@
+{
+  "vertical": "apps",
+  "market": "ios",
+  "code": 200,
+  "end_date": "2013-06-01",
+  "start_date": "2013-06-01",
+  "granularity": "daily",
+  "device": "iphone",
+  "list": [
+      {
+          "rank": 1,
+          "category": "Overall",
+          "country": "US",
+          "feed": "grossing",
+          "product_id": 1,
+          "product_name": "Demo App One",
+          "product_device": "iPad",
+          "product_category": "Games",
+          "release_date": "2012-02-28",
+          "price": 0.99,
+          "has_iap": false,
+          "publisher_id": 8723445,
+          "publisher_name": "Demo Publisher One",
+          "company_id": 1,
+          "company_name": "Demo Company One",
+          "parent_company_id": 1,
+          "parent_company_name": "Demo Parent Company One",
+          "unified_product_id": 1,
+          "unified_product_name": "Demo Unified App One",
+          "product_franchise_id": 1,
+          "product_franchise_name": "Demo App Franchise One",
+          "estimate": 9879
+      }
+  ]
+}

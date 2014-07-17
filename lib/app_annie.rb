@@ -1,7 +1,9 @@
 require 'faraday'
 require 'json'
+require 'app_annie/error_response'
 require 'app_annie/account'
 require 'app_annie/app'
+require 'app_annie/intelligence'
 require 'app_annie/version'
 
 module AppAnnie
@@ -23,13 +25,10 @@ module AppAnnie
       req.url '/v1/accounts', options
     end
 
-    case response.status
-    when 200 then return JSON.parse(response.body)['account_list'].map { |hash| Account.new(hash) }
-    when 401 then raise Unauthorized, "Invalid API key - set an env var for APPANNIE_API_KEY or set AppAnnie.api_key manually"
-    when 429 then raise RateLimitExceeded
-    when 500 then raise ServerError
-    when 503 then raise ServerUnavailable
-    else raise BadResponse, "An error occurred. Response code: #{response.status}"
+    if response.status == 200
+      JSON.parse(response.body)['account_list'].map { |hash| Account.new(hash) }
+    else
+      ErrorResponse.raise_for(response)
     end
   end
 
@@ -43,5 +42,6 @@ module AppAnnie
   class RateLimitExceeded < Exception; end
   class ServerError < Exception; end
   class ServerUnavailable < Exception; end
+  class BadResponse < Exception; end
 
 end
