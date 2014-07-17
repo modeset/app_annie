@@ -28,13 +28,10 @@ module AppAnnie
         req.url "/v1/accounts/#{id}/apps", options
       end
 
-      case response.status
-      when 200 then return JSON.parse(response.body)['app_list'].map { |hash| App.new(self, hash) }
-      when 401 then raise Unauthorized, "Invalid API key - set an env var for APPANNIE_API_KEY or set AppAnnie.api_key manually"
-      when 429 then raise RateLimitExceeded
-      when 500 then raise ServerError
-      when 503 then raise ServerUnavailable
-      else raise BadResponse, "An error occurred. Response code: #{response.status}"
+      if response.status == 200
+        JSON.parse(response.body)['app_list'].map { |hash| App.new(self, hash) }
+      else
+        ErrorResponse.raise_for(response)
       end
     end
 
@@ -45,13 +42,10 @@ module AppAnnie
         req.url "/v1/accounts/#{id}/sales", options
       end
 
-      case response.status
-      when 200 then return JSON.parse(response.body)['sales_list']
-      when 401 then raise Unauthorized, "Invalid API key - set an env var for APPANNIE_API_KEY or set AppAnnie.api_key manually"
-      when 429 then raise RateLimitExceeded
-      when 500 then raise ServerError
-      when 503 then raise ServerUnavailable
-      else raise BadResponse, "An error occurred. Response code: #{response.status}"
+      if response.status == 200
+        JSON.parse(response.body)['sales_list']
+      else
+        ErrorResponse.raise_for(response)
       end
     end
 
