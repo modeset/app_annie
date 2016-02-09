@@ -1,0 +1,46 @@
+{
+  "vertical": "apps",
+  "market": "ios",
+  "currency": "",
+  "code": 200,
+  "product_id": 1,
+  "product_name": "Demo app one",
+  "granularity": "daily",
+  "list": [
+    {
+      "country": "WW",
+      "device": "ipad",
+      "feed":"downloads",
+      "date": "2013-09-01",
+      "estimate": 4243
+    },
+    {
+      "country": "WW",
+      "device": "ipad",
+      "feed":"downloads",
+      "date": "2013-09-02",
+      "estimate": 8465
+    },
+    {
+      "country": "WW",
+      "device": "ipad",
+      "feed":"downloads",
+      "date": "2013-09-03",
+      "estimate": 9432
+    },
+    {
+      "country": "WW",
+      "device": "ipad",
+      "feed":"downloads",
+      "date": "2013-09-04",
+      "estimate": 1306
+    },
+    {
+      "country": "WW",
+      "device": "ipad",
+      "feed":"downloads",
+      "date": "2013-09-05",
+      "estimate": 8510
+    }
+  ]
+}
