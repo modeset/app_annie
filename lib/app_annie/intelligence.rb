@@ -1,6 +1,6 @@
 module AppAnnie
   class Intelligence
-    API_ROOT = "/v1.1/intelligence".freeze
+    API_ROOT = "/v1.2/intelligence".freeze
 
     def self.app_history(opts)
       [

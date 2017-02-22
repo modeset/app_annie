@@ -18,7 +18,7 @@ describe AppAnnie::Intelligence do
             feeds: 'downloads',
             market: 'ios',
           }
-          path = "/v1.1/intelligence/apps/ios/app/#{options[:app_id]}/history"
+          path = "/v1.2/intelligence/apps/ios/app/#{options[:app_id]}/history"
           stubbed_connection = stub_connection(path, app_history_payload)
           allow(AppAnnie).to receive(:connection).and_return(stubbed_connection)
 
@@ -41,7 +41,7 @@ describe AppAnnie::Intelligence do
     def stub_connection(path, payload)
       Faraday.new do |builder|
         builder.adapter :test do |stub|
-          stub.get(path) { [ 200, {}, payload] }
+          stub.get(path) { [200, {}, payload] }
         end
       end
     end
@@ -49,7 +49,7 @@ describe AppAnnie::Intelligence do
     def app_history_payload
       File.read(
         File.expand_path(
-          "../api_fixtures/intelligence_app_history.json",
+          "../../api_fixtures/intelligence_app_history.json",
           __FILE__,
         ),
       )
@@ -66,11 +66,11 @@ describe AppAnnie::Intelligence do
 
       describe 'successfully' do
         let(:options) { {market: 'ios', device: 'iphone', categories: 'Overall > Business'} }
-        let(:mock_resp_file) { File.expand_path("../api_fixtures/intelligence_top_charts.json", __FILE__) }
+        let(:mock_resp_file) { File.expand_path("../../api_fixtures/intelligence_top_charts.json", __FILE__) }
         let(:stub_connection) do
           Faraday.new do |builder|
             builder.adapter :test do |stub|
-              stub.get("/v1.1/intelligence/apps/#{options[:market]}/ranking") {[ 200, {},  File.read(mock_resp_file)]}
+              stub.get("/v1.2/intelligence/apps/#{options[:market]}/ranking") {[ 200, {},  File.read(mock_resp_file)]}
             end
           end
         end

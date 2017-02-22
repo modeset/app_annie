@@ -1,25 +1,31 @@
 require 'spec_helper'
 
 describe AppAnnie::App do
-
-  describe 'building an app from an account and a hash' do
-    let(:raw_hash) {{  "status"=>true,
-                       "app_name"=>"Test App",
-                       "app_id"=>"com.testco.TestApp",
-                       "last_sales_date"=>"2013-12-25",
-                       "first_sales_date"=>"2012-07-29",
-                       "icon"=> "https://lh5.ggpht.com/87Gx7aUL0CajI9b9mLWkFJxcwlCydi_KYxDTZMeyu7nzaDo4MwOA2_8jn8Xz666hUG4=w300" }}
+  describe '#initialize' do
     let(:account) { AppAnnie::Account.new({}) }
+    let(:raw_hash) do
+      {
+        "status"=> true,
+        "app_name"=>"Test App",
+        "app_id"=>"com.testco.TestApp",
+        "last_sales_date"=>"2013-12-25",
+        "first_sales_date"=>"2012-07-29",
+        "icon"=> "https://lh5.ggpht.com/87Gx7aUL0CajI9b9mLWkFJxcwlCydi_KYxDTZMeyu7nzaDo4MwOA2_8jn8Xz666hUG4=w300"
+      }
+    end
 
-    subject { AppAnnie::App.new(account, raw_hash) }
-    its(:account) { should eq(account) }
-    its(:raw) { should eq(raw_hash) }
-    its(:id) { should eq('com.testco.TestApp') }
-    its(:name) { should eq('Test App') }
-    its(:status) { should be_true }
-    its(:icon) { should eq('https://lh5.ggpht.com/87Gx7aUL0CajI9b9mLWkFJxcwlCydi_KYxDTZMeyu7nzaDo4MwOA2_8jn8Xz666hUG4=w300') }
-    its(:first_sales_date) { should eq('2012-07-29') }
-    its(:last_sales_date) { should eq('2013-12-25') }
+    it "builds an AppAnnie app from the account and hash data" do
+      expect(AppAnnie::App.new(account, raw_hash)).to have_attributes(
+        account: account,
+        raw: raw_hash,
+        id: 'com.testco.TestApp',
+        name: 'Test App',
+        status: true,
+        icon: 'https://lh5.ggpht.com/87Gx7aUL0CajI9b9mLWkFJxcwlCydi_KYxDTZMeyu7nzaDo4MwOA2_8jn8Xz666hUG4=w300',
+        first_sales_date: '2012-07-29',
+        last_sales_date: '2013-12-25'
+      )
+    end
   end
 
   describe 'retrieving a list of sales' do
@@ -40,7 +46,6 @@ describe AppAnnie::App do
         result = app.sales
         expect(result.size).to eq(1)
       end
-
     end
 
     describe 'when an authorization error is encountered' do
@@ -86,7 +91,5 @@ describe AppAnnie::App do
         expect { app.sales }.to raise_error(AppAnnie::ServerUnavailable)
       end
     end
-
   end
-
 end
