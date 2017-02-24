@@ -6,11 +6,11 @@
   "start_date": "2013-06-01",
   "granularity": "daily",
   "device": "iphone",
+  "country": "US",
   "list": [
       {
           "rank": 1,
           "category": "Overall",
-          "country": "US",
           "feed": "grossing",
           "product_id": 1,
           "product_name": "Demo App One",
@@ -29,7 +29,10 @@
           "unified_product_name": "Demo Unified App One",
           "product_franchise_id": 1,
           "product_franchise_name": "Demo App Franchise One",
-          "estimate": 9879
+          "estimate": 123,
+          "change_value": 10,
+          "change_rank": 0,
+          "product_code": 123456
       }
   ]
 }
