@@ -4,6 +4,7 @@ require 'app_annie/error_response'
 require 'app_annie/account'
 require 'app_annie/app'
 require 'app_annie/intelligence'
+require 'app_annie/meta_data'
 require 'app_annie/version'
 
 module AppAnnie
@@ -35,6 +36,21 @@ module AppAnnie
   def self.connection
     @connection ||= Faraday.new url: 'https://api.appannie.com' do |faraday|
       faraday.adapter Faraday.default_adapter
+    end
+  end
+
+  def self.authorized_get(path, params = {})
+    response = connection.get do |req|
+      req.headers["Authorization"] = "Bearer #{api_key}"
+      req.headers["Accept"] = "application/json"
+      req.url(path)
+      req.params = params
+    end
+
+    if response.status == 200
+      JSON.parse(response.body)
+    else
+      ErrorResponse.raise_for(response)
     end
   end
 
