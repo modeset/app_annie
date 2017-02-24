@@ -25,10 +25,12 @@ describe AppAnnie do
     before { allow(AppAnnie).to receive(:connection).and_return(stub_connection) }
 
     describe 'successfully' do
+      let(:mock_resp_file) { File.expand_path("../api_fixtures/accounts.json", __FILE__) }
+
       let(:stub_connection) do
         Faraday.new do |builder|
           builder.adapter :test do |stub|
-            stub.get('/v1/accounts') {[ 200, {}, "{\"page_index\":0,\"code\":200,\"account_list\":[{\"account_id\":110000,\"platform\":\"GP\",\"last_sales_date\":\"2014-01-05\",\"account_status\":\"OK\",\"first_sales_date\":\"2012-06-15\",\"publisher_name\":\"AppCo\",\"account_name\":\"AppCo ITC\"}],\"prev_page\":null,\"page_num\":1,\"next_page\":null}" ]}
+            stub.get('/v1/accounts') {[ 200, {}, File.read(mock_resp_file) ]}
           end
         end
       end
