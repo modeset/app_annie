@@ -3,7 +3,7 @@ require 'spec_helper'
 describe AppAnnie do
 
   it 'has a version number' do
-    AppAnnie::VERSION.should_not be_nil
+    expect(AppAnnie::VERSION).not_to be_nil
   end
 
   describe 'setting the API key' do
