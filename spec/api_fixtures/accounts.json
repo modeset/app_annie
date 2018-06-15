@@ -1,0 +1,18 @@
+{
+  "account_list": [
+    {
+      "account_id": 110000,
+      "account_name": "AppCo ITC",
+      "account_status": "OK",
+      "first_sales_date": "2012-06-15",
+      "last_sales_date": "2014-01-05",
+      "platform": "GP",
+      "publisher_name": "AppCo"
+    }
+  ],
+  "code": 200,
+  "next_page": null,
+  "page_index": 0,
+  "page_num": 1,
+  "prev_page": null
+}

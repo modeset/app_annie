@@ -1,0 +1,54 @@
+{
+  "vertical": "apps",
+  "market": "ios",
+  "currency": "",
+  "code": 200,
+  "product_id": 1,
+  "product_name": "Demo app one",
+  "granularity": "daily",
+  "unified_product_name": "DemoApp",
+  "product_franchise_id": null,
+  "product_category": "Fun & Games",
+  "company_id": 12345,
+  "product_code": "com.example.demo",
+  "publisher_name": "ExampleCompany",
+  "country": "WW",
+  "parent_company_id": 12345,
+  "unified_product_id": 12345,
+  "product_franchise_name": "ExampleCompany",
+  "parent_company_name": "ExampleCompany",
+  "publisher_id": 12345,
+  "company_name": "ExampleCompany",
+  "list": [
+    {
+      "device": "ipad",
+      "feed":"downloads",
+      "date": "2013-09-01",
+      "estimate": 4243
+    },
+    {
+      "device": "ipad",
+      "feed":"downloads",
+      "date": "2013-09-02",
+      "estimate": 8465
+    },
+    {
+      "device": "ipad",
+      "feed":"downloads",
+      "date": "2013-09-03",
+      "estimate": 9432
+    },
+    {
+      "device": "ipad",
+      "feed":"downloads",
+      "date": "2013-09-04",
+      "estimate": 1306
+    },
+    {
+      "device": "ipad",
+      "feed":"downloads",
+      "date": "2013-09-05",
+      "estimate": 8510
+    }
+  ]
+}

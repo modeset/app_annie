@@ -1,27 +1,29 @@
 require 'spec_helper'
 
 describe AppAnnie::Account do
-
   describe 'building an account from a hash' do
-    let(:raw_hash) { {
-      "account_id"=>110000,
-      "platform"=>"ITC",
-      "last_sales_date"=>"2014-01-05",
-      "account_status"=>"OK",
-      "first_sales_date"=>"2013-12-07",
-      "publisher_name"=>"AppCo",
-      "account_name"=>"AppCo iTunes"
-    }}
+    it "parses the hash" do
+      raw_hash = {
+        "account_id"=>110000,
+        "platform"=>"ITC",
+        "last_sales_date"=>"2014-01-05",
+        "account_status"=>"OK",
+        "first_sales_date"=>"2013-12-07",
+        "publisher_name"=>"AppCo",
+        "account_name"=>"AppCo iTunes"
+      }
 
-    subject { AppAnnie::Account.new(raw_hash) }
-    its(:raw) { should eq(raw_hash) }
-    its(:id) { should eq(110000) }
-    its(:name) { should eq('AppCo iTunes') }
-    its(:status) { should eq('OK') }
-    its(:platform) { should eq('ITC') }
-    its(:first_sales_date) { should eq('2013-12-07') }
-    its(:last_sales_date) { should eq('2014-01-05') }
-    its(:publisher_name) { should eq('AppCo') }
+      expect(AppAnnie::Account.new(raw_hash)).to have_attributes(
+        raw: raw_hash,
+        id: 110000,
+        name: 'AppCo iTunes',
+        status: 'OK',
+        platform: 'ITC',
+        first_sales_date: '2013-12-07',
+        last_sales_date: '2014-01-05',
+        publisher_name: 'AppCo'
+      )
+    end
   end
 
   describe 'retrieving a list of apps' do
@@ -32,7 +34,7 @@ describe AppAnnie::Account do
       let(:stub_connection) do
         Faraday.new do |builder|
           builder.adapter :test do |stub|
-            stub.get('/v1/accounts/123/apps') {[ 200, {},  "{\"page_index\":0,\"code\":200,\"app_list\":[{\"status\":true,\"app_name\":\"Test App\",\"app_id\":\"com.testco.TestApp\",\"last_sales_date\":\"2013-12-25\",\"first_sales_date\":\"2012-07-29\",\"icon\":\"https://lh5.ggpht.com/87Gx7aUL0CajI9b9mLWkFJxcwlCydi_KYxDTZMeyu7nzaDo4MwOA2_8jn8Xz666hUG4=w300\"}],\"prev_page\":null,\"page_num\":1,\"next_page\":null}" ]}
+            stub.get('/v1/accounts/123/apps') {[ 200, {}, "{\"page_index\":0,\"code\":200,\"app_list\":[{\"status\":true,\"app_name\":\"Test App\",\"app_id\":\"com.testco.TestApp\",\"last_sales_date\":\"2013-12-25\",\"first_sales_date\":\"2012-07-29\",\"icon\":\"https://lh5.ggpht.com/87Gx7aUL0CajI9b9mLWkFJxcwlCydi_KYxDTZMeyu7nzaDo4MwOA2_8jn8Xz666hUG4=w300\"}],\"prev_page\":null,\"page_num\":1,\"next_page\":null}" ]}
           end
         end
       end
@@ -46,7 +48,7 @@ describe AppAnnie::Account do
       it 'sets properties appropriately from the response' do
         app = account.apps.first
         expect(app.account).to be(account)
-        expect(app.status).to be_true
+        expect(app.status).to eq(true)
         expect(app.name).to eq('Test App')
         expect(app.id).to eq('com.testco.TestApp')
         expect(app.last_sales_date).to eq('2013-12-25')
@@ -99,7 +101,5 @@ describe AppAnnie::Account do
         expect { account.apps }.to raise_error(AppAnnie::ServerUnavailable)
       end
     end
-
   end
-
 end
